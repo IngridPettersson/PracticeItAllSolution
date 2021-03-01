@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PracticeItAll
 {
@@ -12,15 +13,22 @@ namespace PracticeItAll
 
             strumpan1.ThingsToDo.Add(new ThingToDo("Practice for test - again", 1));
             strumpan1.ThingsToDo.Add(new ThingToDo("Stop fasting", 3));
-            Console.WriteLine(strumpan1.ThingsToDo.Count);
 
-            CalcTotalResistance();
+            Console.WriteLine($"Number of things in Strumpans todo-list: {strumpan1.ThingsToDo.Count}\n");
+
+            int totalResistance = CalcTotalResistance(strumpan1);
+            PrintTotalResistance(totalResistance);
             
         }
 
-        static void CalcTotalResistance()
+        static void PrintTotalResistance(int totalResistance)
         {
+            Console.WriteLine($"The total built up resistance for Strumpan right now, for all her todos: {totalResistance}\n");
+        }
 
+        static int CalcTotalResistance(Strumpan strumpan)
+        {
+            return strumpan.ThingsToDo.Sum(x => x.Resistance);
         }
     }
 }
