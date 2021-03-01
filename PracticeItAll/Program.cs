@@ -13,6 +13,14 @@ namespace PracticeItAll
             strumpan1.ThingsToDo.Add(new ThingToDo("Practice for test - again", 1));
             strumpan1.ThingsToDo.Add(new ThingToDo("Stop fasting", 3));
             Console.WriteLine(strumpan1.ThingsToDo.Count);
+
+            CalcTotalResistance();
+            
+        }
+
+        static void CalcTotalResistance()
+        {
+
         }
     }
 }
