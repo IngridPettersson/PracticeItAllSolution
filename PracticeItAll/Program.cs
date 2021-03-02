@@ -5,8 +5,8 @@ namespace PracticeItAll
 {
     class Program
     {
-            public static Strumpan strumpan1 = new Strumpan(33);
-            public SoroushTheBaba soroush1 = new SoroushTheBaba("happy1");
+        public static Strumpan strumpan1 = new Strumpan(33);
+        public SoroushTheBaba soroush1 = new SoroushTheBaba("happy1");
         static void Main(string[] args)
         {
 
@@ -22,8 +22,28 @@ namespace PracticeItAll
             int totalResistance = CalcTotalResistance(strumpan1);
             PrintTotalResistance(totalResistance);
             int maxResistance = CalcMaxResistance();
-            //CalcMaxResistanceLinq();
+            int maxResistanceLinq = CalcMaxResistanceLinq();
             PrintMaxResistance(maxResistance);
+            PrintMaxResistance(maxResistanceLinq);
+            GetAllMinResistance();
+
+        }
+
+        private static void GetAllMinResistance()
+        {
+            var minResList = strumpan1.ThingsToDo
+                .GroupBy(x => x.Resistance)
+                .Select(q => q.OrderBy(x => x.Resistance))
+                .First()
+                .ToList();
+            Console.WriteLine("minResList count:");
+            Console.WriteLine(minResList.Count);
+
+            Console.WriteLine("Things with minimum resistance:");
+            foreach (var item in minResList)
+            {
+                Console.WriteLine($"Todo: {item.Todo}\t||\tReistance: {item.Resistance}");
+            }
         }
 
         private static void PrintMaxResistance(int maxRes)
@@ -31,15 +51,15 @@ namespace PracticeItAll
             Console.WriteLine($"Max resistance in Strumpans todo-list: {maxRes}");
         }
 
-        private static void CalcMaxResistanceLinq()
+        private static int CalcMaxResistanceLinq()
         {
-            throw new NotImplementedException();
+            return strumpan1.ThingsToDo.Max(x => x.Resistance);
         }
 
         private static int CalcMaxResistance()
         {
             int maxIndex = strumpan1.ThingsToDo.Count - 1;
-            for (int i = maxIndex - 1; i >= 0 ; i--)
+            for (int i = maxIndex - 1; i >= 0; i--)
             {
                 if (strumpan1.ThingsToDo[i].Resistance > maxIndex)
                 {
